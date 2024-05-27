@@ -1,4 +1,4 @@
-import 'dart:js_interop';
+//import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 import 'package:life_counter/life_event.dart';
@@ -109,7 +109,14 @@ class _AddLifeEventPageState extends State<AddLifeEventPage> {
       appBar: AppBar(
         title: const Text('ライフイベント追加'),
       ),
-      body: TextFormField(),
+      body: TextFormField(
+        onFieldSubmitted: (text) {
+          //lifeEventに代入する形で、LifeEventクラスのインスタンスを生成
+          final lifeEvent = LifeEvent(title: text, count: 0);
+          //popメソッドによって、前のページにlifeEventインスタンスを渡している
+          Navigator.of(context).pop(lifeEvent);
+        },
+      ),
     );
   }
 }
