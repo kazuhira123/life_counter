@@ -93,7 +93,10 @@ class _LifeCounterPage extends State<LifeCounterPage> {
           //newLifeEventがnullで無ければ、取得した値をputしている
           if (newLifeEvent != null) {
             //BoxのputメソッドにnewLifeEventのインスタンスを渡している
+            //putメソッドによって、取得した値をデータベースに保存している
             lifeEventBox?.put(newLifeEvent);
+            lifeEvents = lifeEventBox?.getAll() ?? [];
+            setState(() {});
           }
         },
       ),

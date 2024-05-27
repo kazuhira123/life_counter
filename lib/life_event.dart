@@ -1,5 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 
+//エンティティクラスを定義(エンティティはObjectBoxによって管理されるデータモデル)
 @Entity()
 class LifeEvent {
   LifeEvent({
