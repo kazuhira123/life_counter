@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:life_counter/life_event.dart';
 import 'objectbox.g.dart';
@@ -74,10 +76,24 @@ class _LifeCounterPage extends State<LifeCounterPage> {
             //ListViewの戻り値に取得したlifeEventのtitleを代入
             return Text(lifeEvent.title);
           }),
+      floatingActionButton: FloatingActionButton(
+        //追加用のプラスアイコンを子ウィジェットに追加
+        child: const Icon(Icons.add),
+        onPressed: () {
+          //Navigatorによって新しい画面をスタックにプッシュ(画面遷移)している
+          Navigator.of(context).push(
+            ///新しいページに遷移する為のルートを指定する為の処理
+            MaterialPageRoute(
+              builder: (context) {
+                return const AddLifeEventPage();
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }
-
 
 class AddLifeEventPage extends StatefulWidget {
   const AddLifeEventPage({super.key});
