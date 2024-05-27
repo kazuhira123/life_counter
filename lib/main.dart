@@ -79,9 +79,10 @@ class _LifeCounterPage extends State<LifeCounterPage> {
       floatingActionButton: FloatingActionButton(
         //追加用のプラスアイコンを子ウィジェットに追加
         child: const Icon(Icons.add),
-        onPressed: () {
+        onPressed: () async {
           //Navigatorによって新しい画面をスタックにプッシュ(画面遷移)している
-          Navigator.of(context).push(
+          //LifeEvent型のnewLifeEventを定義し、popで帰ってきた値を受け取っている
+          final newLifeEvent = await Navigator.of(context).push<LifeEvent>(
             ///新しいページに遷移する為のルートを指定する為の処理
             MaterialPageRoute(
               builder: (context) {
@@ -89,6 +90,11 @@ class _LifeCounterPage extends State<LifeCounterPage> {
               },
             ),
           );
+          //newLifeEventがnullで無ければ、取得した値をputしている
+          if (newLifeEvent != null) {
+            //BoxのputメソッドにnewLifeEventのインスタンスを渡している
+            lifeEventBox?.put(newLifeEvent);
+          }
         },
       ),
     );
