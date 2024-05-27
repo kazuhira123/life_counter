@@ -35,11 +35,22 @@ class _LifeCounterPage extends State<LifeCounterPage> {
   //ObjectBoxから値を受け取るための変数storeを定義
   //変数の型名の前に?を入れることで、変数にnullを入れられるようにしている
   Store? store;
+
+  //LifeEventクラスの型を持つBox型の変数lifeEventBoxを定義
   Box<LifeEvent>? lifeEventBox;
+
+  //Boxの中身を入れるリストを定義
+  List<LifeEvent> lifeEvents = [];
 
   Future<void> initialize() async {
     store = await openStore();
+
+    //Boxの中にStoreの値を入れる
     lifeEventBox = store?.box<LifeEvent>();
+
+    //Boxの値をListに入れる
+    //??キーワードによって、lifeEventBoxがnullの際は、getAllを実行する代わりに空のリストが代入される
+    lifeEvents = lifeEventBox?.getAll() ?? [];
     setState(() {});
   }
 
@@ -52,6 +63,17 @@ class _LifeCounterPage extends State<LifeCounterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('人生カウンター'),
+      ),
+      body: ListView.builder(
+          itemCount: lifeEvents.length,
+          itemBuilder: (context, Index) {
+            final lifeEvent = lifeEvents[Index];
+            //ListViewの戻り値に取得したlifeEventのtitleを代入
+            return Text(lifeEvent.title);
+          }),
+    );
   }
 }
