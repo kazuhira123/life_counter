@@ -96,6 +96,7 @@ class _LifeCounterPage extends State<LifeCounterPage> {
                   ),
                   IconButton(
                     onPressed: () {
+                      //LifeEventの引数countが+1ずつされる
                       lifeEvent.count++;
                       //putメソッドによって、データベースにBoxの中身を保存している
                       lifeEventBox?.put(lifeEvent);
@@ -103,6 +104,15 @@ class _LifeCounterPage extends State<LifeCounterPage> {
                       fetchLifeEvents();
                     },
                     icon: const Icon(Icons.plus_one),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      //データベース内の要素を削除するremoveメソッドを使い、Boxの中身を削除している
+                      lifeEventBox?.remove(lifeEvent.id);
+                      //Boxの更新を取得するためにfetchLifeEvents関数を呼び出す
+                      fetchLifeEvents();
+                    },
+                    icon: const Icon(Icons.delete),
                   ),
                 ],
               ),
