@@ -79,7 +79,28 @@ class _LifeCounterPage extends State<LifeCounterPage> {
           itemBuilder: (context, Index) {
             final lifeEvent = lifeEvents[Index];
             //ListViewの戻り値に取得したlifeEventのtitleを代入
-            return Text(lifeEvent.title);
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      lifeEvent.title,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  Text(
+                    //lifeEventのカウントを表示
+                    '${lifeEvent.count}',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.plus_one),
+                  ),
+                ],
+              ),
+            );
           }),
       floatingActionButton: FloatingActionButton(
         //追加用のプラスアイコンを子ウィジェットに追加
