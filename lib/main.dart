@@ -95,7 +95,13 @@ class _LifeCounterPage extends State<LifeCounterPage> {
                     style: const TextStyle(fontSize: 16),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      lifeEvent.count++;
+                      //putメソッドによって、データベースにBoxの中身を保存している
+                      lifeEventBox?.put(lifeEvent);
+                      //保存したBoxの値をfetchLifeEvents関数で取得する
+                      fetchLifeEvents();
+                    },
                     icon: const Icon(Icons.plus_one),
                   ),
                 ],
