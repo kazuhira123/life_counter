@@ -50,6 +50,11 @@ class _LifeCounterPage extends State<LifeCounterPage> {
     //Boxの中にStoreの値を入れる
     lifeEventBox = store?.box<LifeEvent>();
 
+    fetchLifeEvents();
+  }
+
+  //lifeEventsを取得する処理を関数にまとめる
+  void fetchLifeEvents() {
     //Boxの値をListに入れる
     //??キーワードによって、lifeEventBoxがnullの際は、getAllを実行する代わりに空のリストが代入される
     lifeEvents = lifeEventBox?.getAll() ?? [];
@@ -95,8 +100,8 @@ class _LifeCounterPage extends State<LifeCounterPage> {
             //BoxのputメソッドにnewLifeEventのインスタンスを渡している
             //putメソッドによって、取得した値をデータベースに保存している
             lifeEventBox?.put(newLifeEvent);
-            lifeEvents = lifeEventBox?.getAll() ?? [];
-            setState(() {});
+
+            fetchLifeEvents();
           }
         },
       ),
